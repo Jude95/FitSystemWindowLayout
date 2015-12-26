@@ -7,6 +7,12 @@
 ##使用
 依赖 `compile 'com.jude:fitsystemwindowlayout:1.0.8'`  
 
+在value-v21包中的styles.xml中设置
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
 在根布局看需求使用  
 `FitSystemWindowsLinearLayout`  
 `FitSystemWindowsFrameLayout`  
@@ -36,6 +42,8 @@
     app:padding_navigation="true"//默认为false
     app:status_color="#567890"//默认为colorPrimary
     
+##注意
 对本Layout设置的padding会无效。
+使用NavigationBar时注意，触摸控件的位置。以及ListView/RecyclerView的内padding。
     
     
