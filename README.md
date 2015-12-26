@@ -43,7 +43,42 @@
     app:status_color="#567890"//默认为colorPrimary
     
 ##注意
-对本Layout设置的padding会无效。
-使用NavigationBar时注意，触摸控件的位置。以及ListView/RecyclerView的内padding。
+对本Layout设置的padding会无效。  
+使用NavigationBar时注意，触摸控件的位置。可以再使用本Layout来报过以达适配效果  
+    
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/container_place"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <com.jude.fitsystemwindowlayout.FitSystemWindowsFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="right|bottom"
+            app:padding_status="false"
+            app:padding_navigation="true">
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_category"
+                app:fab_colorNormal="?colorAccent"
+                app:fab_colorPressed="?colorAccent"
+                app:fab_size="normal" />
+        </com.jude.fitsystemwindowlayout.FitSystemWindowsFrameLayout>
+    
+    </FrameLayout>
+
+以及ListView/RecyclerView等的内padding。  
+    
+        android:paddingBottom="56dp"
+        android:clipToPadding="false"
+
+
     
     
