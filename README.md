@@ -44,7 +44,7 @@
     
 ##注意
 对本Layout设置的padding会无效。  
-使用NavigationBar时注意，触摸控件的位置。可以再使用本Layout来报过以达适配效果  
+使用NavigationBar时注意，触摸控件的位置。可以再使用本Layout来包裹以达适配效果  
     
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
