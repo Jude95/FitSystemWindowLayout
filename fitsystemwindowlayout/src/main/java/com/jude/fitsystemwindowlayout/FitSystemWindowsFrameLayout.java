@@ -45,6 +45,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
         try {
             TypedValue typedValue = new TypedValue();
             getContext().getTheme().resolveAttribute(android.R.attr.colorPrimary,typedValue,true);
+            if (typedValue.resourceId!=0)
             mStatusBarColor = a.getColor(R.styleable.fit_system_windows_status_color,getResources().getColor(typedValue.resourceId));
             mPaddingStatusBar = a.getBoolean(R.styleable.fit_system_windows_padding_status, true);
             mPaddingNavigationBar = a.getBoolean(R.styleable.fit_system_windows_padding_navigation, false);
