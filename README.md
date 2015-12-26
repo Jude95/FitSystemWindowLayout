@@ -7,7 +7,7 @@
 ##使用
 依赖 `compile 'com.jude:fitsystemwindowlayout:1.0.8'`  
 
-在根布局看需求使用
+在根布局看需求使用  
 `FitSystemWindowsLinearLayout`  
 `FitSystemWindowsFrameLayout`  
 `FitSystemWindowsRelativeLayout`  
@@ -29,7 +29,7 @@
         
     </com.jude.fitsystemwindowlayout.FitSystemWindowsLinearLayout>
     
-最好加上`android:fitsSystemWindows="true"`虽然你加不加显示效果上没有任何区别，但你不加会导致`windowSoftInputMode`设置失效。
+最好加上`android:fitsSystemWindows="true"`虽然你加不加显示效果上没有任何区别，但你不加会导致`windowSoftInputMode`设置失效。  
 可以使用
 
     app:padding_status="false"//默认为true
