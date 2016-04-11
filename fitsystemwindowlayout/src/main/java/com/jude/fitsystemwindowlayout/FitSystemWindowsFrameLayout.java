@@ -81,6 +81,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
 
     public void setStatusBarColor(int color){
         mStatusBarColor = color;
+        mStatusBarPaint.setColor(mStatusBarColor);
         invalidate();
     }
 

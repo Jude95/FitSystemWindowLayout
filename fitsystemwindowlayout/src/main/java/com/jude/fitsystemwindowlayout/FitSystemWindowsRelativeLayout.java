@@ -82,6 +82,7 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
 
     public void setStatusBarColor(int color){
         mStatusBarColor = color;
+        mStatusBarPaint.setColor(mStatusBarColor);
         invalidate();
     }
 

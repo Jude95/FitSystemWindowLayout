@@ -81,6 +81,7 @@ public class FitSystemWindowsLinearLayout extends LinearLayout{
 
     public void setStatusBarColor(int color){
         mStatusBarColor = color;
+        mStatusBarPaint.setColor(mStatusBarColor);
         invalidate();
     }
 

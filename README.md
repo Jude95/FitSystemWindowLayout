@@ -5,7 +5,7 @@
 ![screenshot](screenshot/screenshot1.jpg)
 
 ##使用
-依赖 `compile 'com.jude:fitsystemwindowlayout:1.0.8'`  
+依赖 `compile 'com.jude:fitsystemwindowlayout:1.0.9'`  
 
 在value-v21包中的styles.xml中设置
 
