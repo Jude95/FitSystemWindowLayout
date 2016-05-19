@@ -112,6 +112,13 @@
 那就没办法点击了。需要给它加一个内Padding。  
 所以可以给可滑动View添加这个属性(给需要的子View加，3个layout均支持)  
 `app:padding_navigation="true"`  
+就像这样：
+
+	<ScrollView
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        app:padding_navigation="true"//让ToolBar去适应StatusBar
+	        />
 或者适用`com.jude.fitsystemwindowlayout.Utils.paddingToNavigationBar(view)`
 这个属性只适用于可滑动View(ListView,RecyclerView,ScrollView等)。其他View无效。  
 
