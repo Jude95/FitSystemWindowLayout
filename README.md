@@ -117,7 +117,7 @@
 	<ScrollView
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        app:padding_navigation="true"//让ToolBar去适应StatusBar
+	        app:padding_navigation="true"
 	        />
 或者适用`com.jude.fitsystemwindowlayout.Utils.paddingToNavigationBar(view)`
 这个属性只适用于可滑动View(ListView,RecyclerView,ScrollView等)。其他View无效。  
