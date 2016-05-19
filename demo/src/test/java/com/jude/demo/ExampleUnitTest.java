@@ -1,4 +1,4 @@
-package com.jude.fitsystemwindowlayout;
+package com.jude.demo;
 
 import org.junit.Test;
 

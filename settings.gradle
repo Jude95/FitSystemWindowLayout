@@ -1,1 +1,1 @@
-include ':demo', ':fitsystemwindowlayout'
+include ':fitsystemwindowlayout', ':demo'

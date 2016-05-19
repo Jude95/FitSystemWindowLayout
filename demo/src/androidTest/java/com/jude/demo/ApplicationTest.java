@@ -1,4 +1,4 @@
-package com.jude.fitsystemwindowlayout;
+package com.jude.demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
