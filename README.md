@@ -9,6 +9,7 @@
 `compile 'com.jude:fitsystemwindowlayout:2.0.0'`  
 ## XML配置
 在value中的styles.xml中设置
+
     <!-- Base application theme. -->
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -115,5 +116,21 @@
 这个属性只适用于可滑动View(ListView,RecyclerView,ScrollView等)。其他View无效。  
 
 
-    
+License
+-------
+
+    Copyright 2016 Jude
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
     
