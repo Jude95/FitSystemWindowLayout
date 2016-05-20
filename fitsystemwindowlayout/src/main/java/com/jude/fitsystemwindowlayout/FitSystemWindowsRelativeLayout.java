@@ -70,7 +70,7 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
 
         STATUSBAR_HEIGHT = Utils.getStatusBarHeight(getContext());
         NAVIGATIONBAR_HEIGHT = Utils.getNavigationBarHeight(getContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ){
             if (mPaddingStatusBar) statusBarHeight = STATUSBAR_HEIGHT;
             if (mPaddingNavigationBar&&Utils.hasSoftKeys(getContext())) navigationBarHeight = NAVIGATIONBAR_HEIGHT;
         }
@@ -102,7 +102,7 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
 
     @Override
     public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int bottom = insets.getSystemWindowInsetBottom();
             if(insets.getSystemWindowInsetBottom() == NAVIGATIONBAR_HEIGHT)bottom = mNavigationBarHeight;
             return super.onApplyWindowInsets(insets.replaceSystemWindowInsets(0, mStatusBarHeight, 0,bottom));

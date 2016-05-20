@@ -67,7 +67,7 @@ public class FitSystemWindowsLinearLayout extends LinearLayout{
 
         STATUSBAR_HEIGHT = Utils.getStatusBarHeight(getContext());
         NAVIGATIONBAR_HEIGHT = Utils.getNavigationBarHeight(getContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ){
             if (mPaddingStatusBar) statusBarHeight = STATUSBAR_HEIGHT;
             if (mPaddingNavigationBar&&Utils.hasSoftKeys(getContext())) navigationBarHeight = NAVIGATIONBAR_HEIGHT;
         }
@@ -95,7 +95,7 @@ public class FitSystemWindowsLinearLayout extends LinearLayout{
 
     @Override
     public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Utils.log("onApplyWindowInsets"
                     +"  Left:"+insets.getSystemWindowInsetLeft()
                     +"  Top:"+insets.getSystemWindowInsetTop()

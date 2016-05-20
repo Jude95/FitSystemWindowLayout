@@ -72,11 +72,11 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
         int statusBarHeight = 0;
         int navigationBarHeight = 0;
         setWillNotDraw(false);
-        //setFitsSystemWindows(true);
+        setFitsSystemWindows(true);//不然4.4就会绘制默认的statusBar遮罩
         mScreenOrientation = (getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)?VERTICAL:HORIZONTAL;
         STATUSBAR_HEIGHT = Utils.getStatusBarHeight(getContext());
         NAVIGATIONBAR_HEIGHT = Utils.getNavigationBarHeight(getContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ){
             statusBarHeight = STATUSBAR_HEIGHT;
             if (Utils.hasSoftKeys(getContext())) navigationBarHeight = NAVIGATIONBAR_HEIGHT;
         }
@@ -105,7 +105,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
 
     @Override
     public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Utils.log("onApplyWindowInsets"
                     +"  Left:"+insets.getSystemWindowInsetLeft()
                     +"  Top:"+insets.getSystemWindowInsetTop()
@@ -116,9 +116,12 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                 mInputMethodHeight = insets.getSystemWindowInsetBottom();
                 isInputMethod = true;
             }else {
+                mInputMethodHeight = 0;
                 isInputMethod = false;
             }
-            return insets;//我重写了自己的Padding规则，所以我可以无视对insets的处理
+            int bottom = insets.getSystemWindowInsetBottom();
+            insets.replaceSystemWindowInsets(0,0,0,mInputMethodHeight);//使默认的padding效果失效，因为我完全自己处理了。
+            return insets;//我重写了自己的Padding规则，所以我可以无视对insets的处理。
         } else {
             return insets;
         }
@@ -154,6 +157,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                         mMatchParentChildren.add(child);
                     }
                 }
+                //将父布局的属性转换到子View上。
                 if (lp.isPaddingNavigation()&&mScreenOrientation==VERTICAL)Utils.paddingToNavigationBar(child);
                 if (!lp.hasSetMarginStatus())lp.setMarginStatus(mPaddingStatusBar);
                 if (!lp.hasSetMarginNavigation())lp.setMarginNavigation(mPaddingNavigationBar);
@@ -288,6 +292,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                 switch (verticalGravity) {
                     case Gravity.TOP:
                         childTop = parentTop + lp.topMargin + getStatusValue(lp);
+                        Utils.log(child.getClass().getSimpleName()+" topMargin:"+lp.topMargin+" getStatusValue:"+getStatusValue(lp));
                         break;
                     case Gravity.CENTER_VERTICAL:
                         childTop = parentTop + (parentBottom - parentTop - height) / 2 +
@@ -295,11 +300,11 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                         break;
                     case Gravity.BOTTOM:
                         childTop = parentBottom - height - lp.bottomMargin - getNavigationVerticalValue(lp);//减去竖屏时的导航栏
+                        Utils.log(child.getClass().getSimpleName()+" bottomMargin:"+lp.bottomMargin+" getNavigationVerticalValue:"+getNavigationVerticalValue(lp));
                         break;
                     default:
                         childTop = parentTop + lp.topMargin + getStatusValue(lp);
                 }
-
                 child.layout(childLeft, childTop, childLeft + width, childTop + height);
             }
         }

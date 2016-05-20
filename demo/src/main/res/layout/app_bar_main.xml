@@ -12,7 +12,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:rollviewpager_play_delay="3000"/>
+        app:rollviewpager_play_delay="0"/>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

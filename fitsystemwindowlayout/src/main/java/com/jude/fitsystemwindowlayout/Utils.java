@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  */
 public class Utils {
     public static final String TAG = "FitSystemBar";
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
     /**
      * 取导航栏高度
      * @return
@@ -80,7 +80,7 @@ public class Utils {
     }
 
     public static void paddingToNavigationBar(View view){
-        if (!hasSoftKeys(view.getContext())||Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP)return;
+        if (!hasSoftKeys(view.getContext())||!(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT))return;
         Method method = null;
         try {
             method = view.getClass().getMethod("setClipToPadding", boolean.class);
