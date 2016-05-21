@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
@@ -72,7 +73,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
         int statusBarHeight = 0;
         int navigationBarHeight = 0;
         setWillNotDraw(false);
-        setFitsSystemWindows(true);//不然4.4就会绘制默认的statusBar遮罩
+        setFitsSystemWindows(false);//不然4.4就会绘制默认的statusBar遮罩
         mScreenOrientation = (getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT)?VERTICAL:HORIZONTAL;
         STATUSBAR_HEIGHT = Utils.getStatusBarHeight(getContext());
         NAVIGATIONBAR_HEIGHT = Utils.getNavigationBarHeight(getContext());
@@ -102,6 +103,25 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
     }
 
 
+    @Override
+    protected boolean fitSystemWindows(Rect insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Utils.log("fitSystemWindows"
+                    +"  Left:"+insets.left
+                    +"  Top:"+insets.top
+                    +"  Right:"+insets.right
+                    +"  Bottom:"+insets.bottom);
+            if(insets.bottom > NAVIGATIONBAR_HEIGHT){
+                mInputMethodHeight = insets.bottom;
+                isInputMethod = true;
+            }else {
+                mInputMethodHeight = 0;
+                isInputMethod = false;
+            }
+            insets.set(0,0,0,0);
+        }
+        return super.fitSystemWindows(insets);
+    }
 
     @Override
     public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
@@ -119,8 +139,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                 mInputMethodHeight = 0;
                 isInputMethod = false;
             }
-            int bottom = insets.getSystemWindowInsetBottom();
-            insets.replaceSystemWindowInsets(0,0,0,mInputMethodHeight);//使默认的padding效果失效，因为我完全自己处理了。
+            insets.replaceSystemWindowInsets(0,0,0,0);//使默认的padding效果失效，因为我完全自己处理了。
             return insets;//我重写了自己的Padding规则，所以我可以无视对insets的处理。
         } else {
             return insets;

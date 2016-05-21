@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -92,6 +93,23 @@ public class FitSystemWindowsLinearLayout extends LinearLayout{
         invalidate();
     }
 
+
+    @Override
+    protected boolean fitSystemWindows(Rect insets) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Utils.log("fitSystemWindows"
+                    +"  Left:"+insets.left
+                    +"  Top:"+insets.top
+                    +"  Right:"+insets.right
+                    +"  Bottom:"+insets.bottom);
+            int bottom = insets.bottom;
+            int right = insets.right;
+            if(insets.bottom == NAVIGATIONBAR_HEIGHT)bottom = mNavigationBarHeight;
+            if(insets.right == NAVIGATIONBAR_HEIGHT)right = mNavigationBarHeight;//横屏时才有padding_right
+            insets.set(0, mStatusBarHeight, right, bottom);
+        }
+        return super.fitSystemWindows(insets);
+    }
 
     @Override
     public final WindowInsets onApplyWindowInsets(WindowInsets insets) {

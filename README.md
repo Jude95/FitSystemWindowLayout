@@ -6,7 +6,7 @@
 
 自动处理4.4以下，4.4，5.0以上及有无虚拟按键以及横屏竖屏的各种复合情况下的布局(好累...)
 ## 依赖
-`compile 'com.jude:fitsystemwindowlayout:2.0.0'`  
+`compile 'com.jude:fitsystemwindowlayout:2.1.1'`  
 ## XML配置
 在value中的styles.xml中设置
 
@@ -68,7 +68,7 @@
     默认效果是不能使用StatusBar的位置，可以使用NavigationBar的位置。
     
 ## 对子View的单独属性配置
-只有`FitSystemWindowsFrameLayout`支持对每个自己直接子View指定属性：(其他2个View实现略难暂未实现)
+对每个自己直接子View指定属性：(LinearLayout无效，都明白..)
 
     app:margin_status="false"
     app:margin_navigation="true"
@@ -110,7 +110,7 @@
 如果可滑动View的最后一个View这样显示。  
 ![screenshot](screenshot/screenshot2.png)  
 那就没办法点击了。需要给它加一个内Padding。  
-所以可以给可滑动View添加这个属性(给需要的子View加，3个layout均支持)  
+所以可以给可滑动View添加这个属性(给需要的子View加)  
 `app:padding_navigation="true"`  
 就像这样：
 
@@ -122,7 +122,7 @@
 或者适用`com.jude.fitsystemwindowlayout.Utils.paddingToNavigationBar(view)`
 这个属性只适用于可滑动View(ListView,RecyclerView,ScrollView等)。其他View无效。  
 
-
+**详见demo**
 License
 -------
 

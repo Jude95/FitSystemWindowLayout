@@ -9,16 +9,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="Demo"
-            android:theme="@style/AppTheme">
+            android:name=".FrameLayoutActivity"
+            android:label="FrameLayoutActivity"/>
+
+        <activity android:name=".LinearLayoutActivity"
+            android:label="LinearLayoutActivity"/>
+
+        <activity android:name=".RelativeLayoutActivity"
+            android:label="RelativeLayoutActivity"/>
+
+        <activity android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FitSystemTestActivity"></activity>
     </application>
 
 </manifest>
