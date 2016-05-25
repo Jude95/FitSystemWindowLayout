@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jude.demo.TestView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/holo_blue_bright"
+    tools:context="com.jude.demo.TestActivity"
+    android:tag="out">
+
+    <com.jude.demo.TestView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_green_light"
+        android:tag="center">
+        <com.jude.demo.TestView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:tag="inner">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.jude.demo.TestView>
+
+
+    </com.jude.demo.TestView>
+
+</com.jude.demo.TestView>

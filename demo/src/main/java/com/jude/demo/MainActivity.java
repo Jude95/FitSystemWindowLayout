@@ -25,12 +25,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,LinearLayoutActivity.class));
             }
-        });findViewById(R.id.relative).setOnClickListener(new View.OnClickListener() {
+        });
+        findViewById(R.id.relative).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,RelativeLayoutActivity.class));
             }
         });
-
+        findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,TestActivity.class));
+            }
+        });
     }
 }
