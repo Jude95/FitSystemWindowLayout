@@ -153,12 +153,14 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
             if (!lp.hasSetMarginStatus())lp.topMargin = getStatusValue(lp);
             else lp.topMargin = lp.isMarginStatus()?mStatusBarHeight:0;
 
-            if (!lp.hasSetMarginNavigation()){
-                lp.bottomMargin =  getNavigationVerticalValue(lp);
-                lp.rightMargin  =  getNavigationHorizontalValue(lp);
-            }else {
-                lp.bottomMargin =  isInputMethod ? mInputMethodHeight : ((mScreenOrientation == VERTICAL) ? mNavigationBarHeight : 0);
-                lp.rightMargin  =  (mScreenOrientation == HORIZONTAL) ? mNavigationBarHeight : 0;
+            if (!lp.isForceLayout()){
+                if (!lp.hasSetMarginNavigation()){
+                    lp.bottomMargin =  getNavigationVerticalValue(lp);
+                    lp.rightMargin  =  getNavigationHorizontalValue(lp);
+                }else {
+                    lp.bottomMargin =  isInputMethod ? mInputMethodHeight : ((mScreenOrientation == VERTICAL) ? mNavigationBarHeight : 0);
+                    lp.rightMargin  =  (mScreenOrientation == HORIZONTAL) ? mNavigationBarHeight : 0;
+                }
             }
             Utils.log(""+child.getClass().getSimpleName()+" "+lp.leftMargin+" - "+lp.topMargin+" - "+lp.rightMargin+" - "+lp.bottomMargin);
         }
@@ -206,6 +208,8 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
         private boolean mMarginNavigation = false;
         private boolean mHasSetMarginNavigation = false;
 
+        private boolean mForceLayout = false;
+
         public LayoutParams(Context context, AttributeSet attrs) {
             super(context, attrs);
             final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -225,7 +229,29 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
             this.mPaddingNavigation = a.getBoolean(
                     R.styleable.fit_system_windows_padding_navigation,
                     false);
+
+            out:for (int i : getRules()) {
+                switch (i){
+                    case ABOVE:
+                    case BELOW:
+                    case ALIGN_BASELINE:
+                    case ALIGN_BOTTOM:
+                    case ALIGN_TOP:
+                    case CENTER_IN_PARENT:
+                    case CENTER_VERTICAL:
+                        mForceLayout = true;
+                        break out;
+                }
+            }
             a.recycle();
+        }
+
+        public boolean isForceLayout() {
+            return mForceLayout;
+        }
+
+        public void setForceLayout(boolean mForceLayout) {
+            this.mForceLayout = mForceLayout;
         }
 
         public LayoutParams(int width, int height) {
