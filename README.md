@@ -4,7 +4,7 @@
 方便的建立类似这样的APP
 ![screenshot](screenshot/screenshot1.jpg)
 
-自动处理4.4以下，4.4，5.0以上及有无虚拟按键以及横屏竖屏的各种复合情况下的布局(好累...)
+自动处理4.4以下，4.4，5.0以上及有无虚拟按键以及横屏竖屏的各种复合情况下的`FrameLayout`,`LinearLayout`,`RelativeLayout`3种布局(好累...)
 ## 依赖
 `compile 'com.jude:fitsystemwindowlayout:2.1.2'`  
 ## XML配置
