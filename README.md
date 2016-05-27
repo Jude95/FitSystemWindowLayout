@@ -6,7 +6,7 @@
 
 自动处理4.4以下，4.4，5.0以上及有无虚拟按键以及横屏竖屏的各种复合情况下的布局(好累...)
 ## 依赖
-`compile 'com.jude:fitsystemwindowlayout:2.1.2'`  
+`compile 'com.jude:fitsystemwindowlayout:2.1.4'`  
 ## XML配置
 在value中的styles.xml中设置
 
@@ -60,7 +60,7 @@
 
     app:padding_status="false"//默认为true
     app:padding_navigation="true"//默认为false
-    app:status_color="#567890"//默认为colorPrimary
+    app:status_color="#567890"//默认为colorPrimary，
     
     `padding_status`会自动增加StatusBar的位置的Padding，颜色默认是主题里的`ColorPrimary`；  
     `padding_navigation`会自动增加NavigationBar位置的Padding。  

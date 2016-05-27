@@ -58,10 +58,17 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
     protected void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.fit_system_windows);
         try {
-            TypedValue typedValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(android.R.attr.colorPrimary,typedValue,true);
-            if (typedValue.resourceId!=0)
-            mStatusBarColor = a.getColor(R.styleable.fit_system_windows_status_color,getResources().getColor(typedValue.resourceId));
+            int colorAttr;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                colorAttr = android.R.attr.colorPrimary;
+            } else {
+                colorAttr = getContext().getResources().getIdentifier("colorPrimary", "attr", getContext().getPackageName());
+            }
+            TypedValue outValue = new TypedValue();
+            getContext().getTheme().resolveAttribute(colorAttr, outValue, true);
+
+            if (outValue.resourceId!=0)mStatusBarColor = getResources().getColor(outValue.resourceId);
+            mStatusBarColor = a.getColor(R.styleable.fit_system_windows_status_color,mStatusBarColor);
             mPaddingStatusBar = a.getBoolean(R.styleable.fit_system_windows_padding_status, true);
             mPaddingNavigationBar = a.getBoolean(R.styleable.fit_system_windows_padding_navigation, false);
         } finally {

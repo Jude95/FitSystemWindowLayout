@@ -32,7 +32,7 @@ ext {
     siteUrl = 'https://github.com/Jude95/FitSystemWindowLayout'
     gitUrl = 'https://github.com/Jude95/FitSystemWindowLayout'
 
-    libraryVersion = '2.1.2'//版本号
+    libraryVersion = '2.1.4'//版本号
     libraryName = 'fitsystemwindowlayout'//项目名字，没什么用
     libraryDescription = 'A tool for Android'//项目描述，没什么用
 
