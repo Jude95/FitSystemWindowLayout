@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  */
 public class Utils {
     public static final String TAG = "FitSystemBar";
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
     /**
      * 取导航栏高度
      * @return

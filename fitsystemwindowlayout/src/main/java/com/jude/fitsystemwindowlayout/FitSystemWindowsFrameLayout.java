@@ -71,6 +71,7 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
             mStatusBarColor = a.getColor(R.styleable.fit_system_windows_status_color,mStatusBarColor);
             mPaddingStatusBar = a.getBoolean(R.styleable.fit_system_windows_padding_status, true);
             mPaddingNavigationBar = a.getBoolean(R.styleable.fit_system_windows_padding_navigation, false);
+            Utils.log("initAttrs"+" mStatusBarColor"+mStatusBarColor+"  mPaddingStatusBar:"+mPaddingStatusBar+"  mPaddingStatusBar:"+mPaddingStatusBar);
         } finally {
             a.recycle();
         }
