@@ -154,22 +154,23 @@ public class FitSystemWindowsRelativeLayout extends RelativeLayout{
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             LayoutParams lp = (LayoutParams) child.getLayoutParams();
-            //可滑动View内Pading
+            //可滑动View内Padding
             if (mScreenOrientation == VERTICAL&&lp.isPaddingNavigation())Utils.paddingToNavigationBar(child);
 
-            //合适的marginStatus与marginNavigation
-            if (!lp.hasSetMarginStatus())lp.topMargin = getStatusValue(lp);
-            else lp.topMargin = lp.isMarginStatus()?mStatusBarHeight:0;
-
-            if (!lp.isForceLayout()){
-                if (!lp.hasSetMarginNavigation()){
-                    lp.bottomMargin =  getNavigationVerticalValue(lp);
-                    lp.rightMargin  =  getNavigationHorizontalValue(lp);
-                }else {
-                    lp.bottomMargin =  isInputMethod ? mInputMethodHeight : ((mScreenOrientation == VERTICAL) ? mNavigationBarHeight : 0);
-                    lp.rightMargin  =  (mScreenOrientation == HORIZONTAL) ? mNavigationBarHeight : 0;
-                }
+            if (!lp.hasSetMarginStatus()&&!lp.isForceLayout()){
+                lp.setMarginStatus(mPaddingStatusBar);
             }
+
+            if (!lp.hasSetMarginNavigation()&&!lp.isForceLayout()){
+                lp.setMarginNavigation(mPaddingNavigationBar);
+            }
+
+            //合适的marginStatus与marginNavigation
+            lp.topMargin = getStatusValue(lp);
+
+            lp.bottomMargin =  getNavigationVerticalValue(lp);
+            lp.rightMargin  =  getNavigationHorizontalValue(lp);
+
             Utils.log(""+child.getClass().getSimpleName()+" "+lp.leftMargin+" - "+lp.topMargin+" - "+lp.rightMargin+" - "+lp.bottomMargin);
         }
     }

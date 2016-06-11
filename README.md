@@ -6,7 +6,7 @@
 
 自动处理4.4以下，4.4，5.0以上及有无虚拟按键以及横屏竖屏的各种复合情况下的`FrameLayout`,`LinearLayout`,`RelativeLayout`3种布局(好累...)
 ## 依赖
-`compile 'com.jude:fitsystemwindowlayout:2.1.4'`  
+`compile 'com.jude:fitsystemwindowlayout:2.1.5'`  
 ## XML配置
 在value中的styles.xml中设置
 

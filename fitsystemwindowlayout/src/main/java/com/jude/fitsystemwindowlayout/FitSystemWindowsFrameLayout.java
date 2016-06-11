@@ -168,11 +168,19 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
         int maxWidth = 0;
         int childState = 0;
 
+
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
-                measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
                 final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                //将父布局的属性转换到子View上。
+                if (lp.isPaddingNavigation()&&mScreenOrientation==VERTICAL)Utils.paddingToNavigationBar(child);
+                if (!lp.hasSetMarginStatus())lp.setMarginStatus(mPaddingStatusBar);
+                if (!lp.hasSetMarginNavigation())lp.setMarginNavigation(mPaddingNavigationBar);
+
+                int usedHeight = (lp.isMarginStatus()?mStatusBarHeight:0)+(lp.isMarginNavigation()&&mScreenOrientation == VERTICAL?mNavigationBarHeight:0);
+                int usedWidth = (lp.isMarginNavigation()&&mScreenOrientation == HORIZONTAL?mNavigationBarHeight:0);
+                measureChildWithMargins(child, widthMeasureSpec, usedWidth, heightMeasureSpec, usedHeight);
                 maxWidth = Math.max(maxWidth,
                         child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
                 maxHeight = Math.max(maxHeight,
@@ -184,10 +192,6 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                         mMatchParentChildren.add(child);
                     }
                 }
-                //将父布局的属性转换到子View上。
-                if (lp.isPaddingNavigation()&&mScreenOrientation==VERTICAL)Utils.paddingToNavigationBar(child);
-                if (!lp.hasSetMarginStatus())lp.setMarginStatus(mPaddingStatusBar);
-                if (!lp.hasSetMarginNavigation())lp.setMarginNavigation(mPaddingNavigationBar);
                 Utils.log("measure "+ child.getClass().getSimpleName()+"  isMarginStatus:"+(lp.isMarginStatus()?"true":"false")+"  isMarginNavigation:"+(lp.isMarginNavigation()?"true":"false"));
             }
         }
@@ -212,41 +216,39 @@ public class FitSystemWindowsFrameLayout extends FrameLayout{
                         childState << MEASURED_HEIGHT_STATE_SHIFT));
 
         count = mMatchParentChildren.size();
-        if (count > 1) {
-            for (int i = 0; i < count; i++) {
-                final View child = mMatchParentChildren.get(i);
-                final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+        for (int i = 0; i < count; i++) {
+            final View child = mMatchParentChildren.get(i);
+            final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 
-                final int childWidthMeasureSpec;
-                if (lp.width == LayoutParams.MATCH_PARENT) {
-                    final int width = Math.max(0, getMeasuredWidth()
+            final int childWidthMeasureSpec;
+            if (lp.width == LayoutParams.MATCH_PARENT) {
+                final int width = Math.max(0, getMeasuredWidth()
 //                            - getPaddingLeftWithForeground() - getPaddingRightWithForeground()
-                            - lp.leftMargin - lp.rightMargin - getNavigationHorizontalValue(lp));
-                    childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                            width, MeasureSpec.EXACTLY);
-                } else {
-                    childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec,
+                        - lp.leftMargin - lp.rightMargin - getNavigationHorizontalValue(lp));
+                childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
+                        width, MeasureSpec.EXACTLY);
+            } else {
+                childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec,
 //                            getPaddingLeftWithForeground() + getPaddingRightWithForeground() +
-                            lp.leftMargin + lp.rightMargin + getNavigationHorizontalValue(lp),
-                            lp.width);
-                }
-
-                final int childHeightMeasureSpec;
-                if (lp.height == LayoutParams.MATCH_PARENT) {
-                    final int height = Math.max(0, getMeasuredHeight()
-//                            - getPaddingTopWithForeground() - getPaddingBottomWithForeground()
-                            - lp.topMargin - lp.bottomMargin - getStatusValue(lp) - getNavigationVerticalValue(lp));
-                    childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
-                            height, MeasureSpec.EXACTLY);
-                } else {
-                    childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec,
-//                            getPaddingTopWithForeground() + getPaddingBottomWithForeground() +
-                            lp.topMargin + lp.bottomMargin + getStatusValue(lp) + getNavigationVerticalValue(lp),//当设置时增加额外的Padding
-                            lp.height);
-                }
-
-                child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+                        lp.leftMargin + lp.rightMargin + getNavigationHorizontalValue(lp),
+                        lp.width);
             }
+
+            final int childHeightMeasureSpec;
+            if (lp.height == LayoutParams.MATCH_PARENT) {
+                final int height = Math.max(0, getMeasuredHeight()
+//                            - getPaddingTopWithForeground() - getPaddingBottomWithForeground()
+                        - lp.topMargin - lp.bottomMargin - getStatusValue(lp) - getNavigationVerticalValue(lp));
+                childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                        height, MeasureSpec.EXACTLY);
+            } else {
+                childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec,
+//                            getPaddingTopWithForeground() + getPaddingBottomWithForeground() +
+                        lp.topMargin + lp.bottomMargin + getStatusValue(lp) + getNavigationVerticalValue(lp),//当设置时增加额外的Padding
+                        lp.height);
+            }
+
+            child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         }
     }
 
