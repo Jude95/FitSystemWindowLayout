@@ -1,4 +1,4 @@
-##FitSystemWindowLayout
+## FitSystemWindowLayout
 自动适应StatusBar与NavigationBar的Layout。  
 原理：根据你的配置自动设置基于StatusBar与NavigationBar的padding。 
 方便的建立类似这样的APP
